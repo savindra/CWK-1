@@ -1,0 +1,7 @@
+package org.eclipse.wb.swing;
+
+import javax.swing.JFrame;
+
+public class UI_Employee extends JFrame {
+
+}

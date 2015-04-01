@@ -1,0 +1,44 @@
+import java.util.Date;
+
+import de.root1.simon.annotation.SimonRemote;
+
+@SimonRemote(value = {CollectionPointInterface.class})
+public class CollectionPoint implements CollectionPointInterface {
+	
+	private String name;
+	private Address address;
+	private Date dateTime;
+	private String courierFirm;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	
+	public void setAddress(String street, String city, String postcode,String country) {
+		address.setStreet(street);
+		address.setCity(city);
+		address.setPostcode(postcode);
+		address.setCountry(country);
+	}
+	
+	public Date getDateTime() {
+		return dateTime;
+	}
+	public void setDateTime(Date dateTime) {
+		this.dateTime = dateTime;
+	}
+	public String getCourierFirm() {
+		return courierFirm;
+	}
+	public void setCourierFirm(String courierFirm) {
+		this.courierFirm = courierFirm;
+	}
+	
+	
+}

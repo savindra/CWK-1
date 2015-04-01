@@ -1,0 +1,6 @@
+import javax.swing.JFrame;
+
+
+public class UI_Registration extends JFrame {
+
+}

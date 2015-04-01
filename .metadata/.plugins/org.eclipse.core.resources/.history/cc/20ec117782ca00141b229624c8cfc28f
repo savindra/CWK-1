@@ -1,0 +1,21 @@
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.ResourceBundle.Control;
+
+
+public class LanguagesController {
+	
+	private String lang = "";
+	private String country = "";
+	
+	
+	
+	
+	 public String getWord(String keyword)
+	 {
+	       return translation.getString(keyword);
+	 }
+	 
+}

@@ -1,0 +1,83 @@
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import de.root1.simon.Lookup;
+import de.root1.simon.Simon;
+import de.root1.simon.exceptions.EstablishConnectionFailed;
+import de.root1.simon.exceptions.LookupFailedException;
+
+import java.awt.Dimension;
+
+public class UI_Login extends JFrame {
+	private JPasswordField passwordField;
+	private JTextField textField_username;
+	public UI_Login() {
+		setVisible(true);
+		setSize(new Dimension(350, 410));
+		getContentPane().setLayout(null);
+		
+		JLabel lblUsername = new JLabel("Username");
+		lblUsername.setBounds(71, 187, 94, 16);
+		getContentPane().add(lblUsername);
+		
+		textField_username = new JTextField();
+		textField_username.setBounds(69, 209, 216, 28);
+		getContentPane().add(textField_username);
+		textField_username.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setBounds(71, 249, 94, 16);
+		getContentPane().add(lblPassword);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(69, 275, 214, 28);
+		getContentPane().add(passwordField);
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				String username;
+				String password;
+				ServerInterface server = null;
+				
+				if(e.getSource() == btnLogin) {
+					username = textField_username.getText();
+					password = new String(passwordField.getPassword());
+				
+					try {
+						Lookup nameLookup = Simon.createNameLookup("127.0.0.1", 44444);
+				    	server = (ServerInterface) nameLookup.lookup("server");
+					} catch (LookupFailedException | EstablishConnectionFailed | UnknownHostException e2) {
+						e2.printStackTrace();
+					}
+					if( server.login(username, password) )
+						Client.createCustomerUI(true);
+				}
+			}
+		});
+		btnLogin.setBounds(127, 319, 90, 28);
+		getContentPane().add(btnLogin);
+		
+	}
+	
+	public static UI_Login run(){
+		return new UI_Login();
+	}
+	
+	public boolean login(String username, String password) throws IOException, LookupFailedException, EstablishConnectionFailed, NoSuchAlgorithmException {
+        ServerInterface server = Client.createServer();
+        return server.login(username, password);
+	}
+}

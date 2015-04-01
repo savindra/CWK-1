@@ -1,0 +1,14 @@
+import java.awt.HeadlessException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
+public interface DatabaseInterface {
+	
+	public CustomerInterface getCustomer(String userID);
+	
+	public String getLastUserID();
+
+}

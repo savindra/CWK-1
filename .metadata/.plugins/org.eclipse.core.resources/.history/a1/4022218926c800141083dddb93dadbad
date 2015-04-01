@@ -1,0 +1,171 @@
+import javax.swing.JFrame;
+
+import java.awt.Dimension;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
+
+import java.awt.ComponentOrientation;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
+
+import java.awt.Color;
+
+import javax.swing.JLabel;
+
+import java.awt.Font;
+import java.net.UnknownHostException;
+
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+
+import de.root1.simon.exceptions.EstablishConnectionFailed;
+import de.root1.simon.exceptions.LookupFailedException;
+
+public class UI_Employee extends JFrame {
+	private JTextField textField;
+	private JTable table_clients;
+	public UI_Employee() {
+		setTitle("Employee - Cryo Cell Coporation");
+		setSize(new Dimension(906, 586));
+		getContentPane().setLayout(null);
+		
+		JTabbedPane tabbedPane_main = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane_main.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		tabbedPane_main.setBounds(0, 6, 890, 542);
+		getContentPane().add(tabbedPane_main);
+		
+		JPanel panel_myAcc = new JPanel();
+		tabbedPane_main.addTab("My Account", null, panel_myAcc, null);
+		panel_myAcc.setLayout(null);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		panel_2.setBorder(null);
+		panel_2.setBackground(Color.WHITE);
+		panel_2.setBounds(20, 22, 850, 117);
+		panel_myAcc.add(panel_2);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(UI_Employee.class.getResource("/img/avatarn.png")));
+		label.setBounds(17, 6, 100, 100);
+		panel_2.add(label);
+		
+		JLabel label_1 = new JLabel("Account Details");
+		label_1.setFont(new Font("SansSerif", Font.BOLD, 17));
+		label_1.setBounds(145, 17, 152, 29);
+		panel_2.add(label_1);
+		
+		JLabel label_2 = new JLabel("You current account details are listed below.");
+		label_2.setBounds(145, 46, 282, 16);
+		panel_2.add(label_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(null);
+		panel_3.setBackground(Color.WHITE);
+		panel_3.setBounds(20, 141, 850, 265);
+		panel_myAcc.add(panel_3);
+		
+		JButton btnNewButton = new JButton("Log out");
+		btnNewButton.setBounds(780, 418, 90, 28);
+		panel_myAcc.add(btnNewButton);
+		
+		JPanel panel_userAcc = new JPanel();
+		tabbedPane_main.addTab("User Accounts", null, panel_userAcc, null);
+		
+		JPanel panel_tests = new JPanel();
+		tabbedPane_main.addTab("Tests", null, panel_tests, null);
+		
+		JPanel panel_sample = new JPanel();
+		tabbedPane_main.addTab("Sample", null, panel_sample, null);
+		
+		JPanel panel_client = new JPanel();
+		tabbedPane_main.addTab("Client", null, panel_client, null);
+		panel_client.setLayout(null);
+		
+		JTabbedPane tabbedPane_client = new JTabbedPane(JTabbedPane.LEFT);
+		tabbedPane_client.setBounds(6, 6, 878, 456);
+		panel_client.add(tabbedPane_client);
+		
+		JPanel panel_1 = new JPanel();
+		tabbedPane_client.addTab("New tab", null, panel_1, null);
+		
+		JPanel panel_viewclient = new JPanel();
+		tabbedPane_client.addTab("View Clients", null, panel_viewclient, null);
+		panel_viewclient.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(6, 6, 775, 107);
+		panel_viewclient.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblClients = new JLabel("Clients");
+		lblClients.setFont(new Font("SansSerif", Font.BOLD, 17));
+		lblClients.setBounds(21, 6, 88, 28);
+		panel.add(lblClients);
+		
+		JLabel lblViewEditSearch = new JLabel("View, Edit Search records of clients registered with CCC.");
+		lblViewEditSearch.setBounds(21, 30, 575, 39);
+		panel.add(lblViewEditSearch);
+		
+		JButton btnNewButton_1 = new JButton("Edit");
+		btnNewButton_1.setBounds(21, 73, 90, 28);
+		panel.add(btnNewButton_1);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.setBounds(123, 73, 90, 28);
+		panel.add(btnDelete);
+		
+		JLabel lblViewAll = new JLabel("<html><a href=\"#\">View All</a></html>");
+		lblViewAll.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+				try {
+					DatabaseTableInterface databaseTable = (DatabaseTableInterface) Client.getLookup().lookup("databasetable");
+					databaseTable.allClients();
+					table_clients.setModel((TableModel) databaseTable);
+				} catch (UnknownHostException | LookupFailedException
+						| EstablishConnectionFailed e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		lblViewAll.setBounds(233, 81, 55, 16);
+		panel.add(lblViewAll);
+		
+		JLabel lblUsername = new JLabel("Username");
+		lblUsername.setBounds(487, 79, 72, 16);
+		panel.add(lblUsername);
+		
+		textField = new JTextField();
+		textField.setBounds(551, 73, 122, 28);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.setBounds(685, 73, 84, 28);
+		panel.add(btnSearch);
+		
+		table_clients = new JTable();
+		table_clients.setBounds(6, 125, 775, 331);
+		panel_viewclient.add(table_clients);
+		
+		JPanel panel_dashboard = new JPanel();
+		panel_dashboard.addMouseListener(new MouseAdapter() {
+			
+		});
+		tabbedPane_main.addTab("Dashboard", new ImageIcon(UI_Employee.class.getResource("/img/dashboard.png")), panel_dashboard, null);
+		
+	}
+	
+	public static void run(){
+		new UI_Employee().setVisible(true);
+	}
+}

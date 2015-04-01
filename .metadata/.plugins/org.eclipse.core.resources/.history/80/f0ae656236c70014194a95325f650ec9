@@ -1,0 +1,249 @@
+package GUI;
+
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
+import java.awt.SystemColor;
+import java.awt.Dimension;
+import java.awt.Component;
+import javax.swing.JPopupMenu;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.ComponentOrientation;
+import java.awt.FlowLayout;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.JScrollBar;
+import javax.swing.ScrollPaneConstants;
+
+public class UI_Customer extends JFrame {
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	public UI_Customer() {
+		setForeground(Color.GRAY);
+		setFocusable(false);
+		setTitle("Customer - Cryo Cell Coporation");
+		setVisible(true);
+		setSize(new Dimension(906, 586));
+		setBackground(SystemColor.desktop);
+		getContentPane().setLayout(null);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBackground(Color.DARK_GRAY);
+		tabbedPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		tabbedPane.setBounds(0, 0, 890, 530);
+		getContentPane().add(tabbedPane);
+		
+		JPanel panel_myAccount = new JPanel();
+		panel_myAccount.setEnabled(false);
+		tabbedPane.addTab("My Account", null, panel_myAccount, null);
+		panel_myAccount.setLayout(null);
+		
+		JButton btnLogout = new JButton("Log out");
+		btnLogout.setBounds(774, 429, 95, 25);
+		panel_myAccount.add(btnLogout);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBorder(null);
+		panel.setBounds(19, 27, 850, 117);
+		panel_myAccount.add(panel);
+		panel.setLayout(null);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("C:\\Users\\user\\Desktop\\avatarn.png"));
+		label.setBounds(17, 6, 100, 100);
+		panel.add(label);
+		
+		JLabel lblAccountDetails = new JLabel("Account Details");
+		lblAccountDetails.setFont(new Font("SansSerif", Font.BOLD, 17));
+		lblAccountDetails.setBounds(145, 17, 152, 29);
+		panel.add(lblAccountDetails);
+		
+		JLabel lblYouCurrentAccount = new JLabel("You current account details are listed below.");
+		lblYouCurrentAccount.setBounds(145, 46, 282, 16);
+		panel.add(lblYouCurrentAccount);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(null);
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(19, 146, 850, 222);
+		panel_myAccount.add(panel_1);
+		
+		JPanel panel_Settings = new JPanel();
+		tabbedPane.addTab("Settings", null, panel_Settings, null);
+		
+		JPanel panel_support = new JPanel();
+		tabbedPane.addTab("Support", null, panel_support, null);
+		panel_support.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(442, 5, 6, 6);
+		panel_support.add(scrollPane);
+		
+		JTabbedPane tabbedPane_2 = new JTabbedPane(JTabbedPane.LEFT);
+		tabbedPane_2.setBackground(Color.WHITE);
+		tabbedPane_2.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPane_2.setBounds(6, 20, 862, 446);
+		panel_support.add(tabbedPane_2);
+		
+		JPanel panel_newSupport = new JPanel();
+		panel_newSupport.setBackground(Color.WHITE);
+		tabbedPane_2.addTab("New Support Ticket", null, panel_newSupport, null);
+		panel_newSupport.setLayout(null);
+		
+		JLabel lblOpenTicket = new JLabel("Open Ticket");
+		lblOpenTicket.setFont(new Font("SansSerif", Font.BOLD, 17));
+		lblOpenTicket.setBounds(26, 17, 112, 31);
+		panel_newSupport.add(lblOpenTicket);
+		
+		JLabel lblNewLabel = new JLabel("If you can't find a solution to your problems, you can submit a ticket by selecting the appropriate options below.");
+		lblNewLabel.setBounds(26, 52, 610, 16);
+		panel_newSupport.add(lblNewLabel);
+		
+		JLabel lblName = new JLabel("Name");
+		lblName.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblName.setBounds(26, 90, 55, 16);
+		panel_newSupport.add(lblName);
+		
+		textField = new JTextField();
+		textField.setBounds(26, 107, 217, 28);
+		panel_newSupport.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setBounds(366, 90, 55, 16);
+		panel_newSupport.add(lblEmail);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(366, 107, 205, 28);
+		panel_newSupport.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblSubject = new JLabel("Subject");
+		lblSubject.setBounds(26, 147, 55, 16);
+		panel_newSupport.add(lblSubject);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(26, 164, 344, 28);
+		panel_newSupport.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblDepartment = new JLabel("Department");
+		lblDepartment.setBounds(26, 207, 86, 16);
+		panel_newSupport.add(lblDepartment);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Payment Related", "General Enquiry", "Need any other Help"}));
+		comboBox.setBounds(26, 225, 173, 26);
+		panel_newSupport.add(comboBox);
+		
+		JLabel lblNewLabel_1 = new JLabel("Related Sample");
+		lblNewLabel_1.setBounds(282, 207, 99, 16);
+		panel_newSupport.add(lblNewLabel_1);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(282, 225, 157, 26);
+		panel_newSupport.add(comboBox_1);
+		
+		JLabel lblPriority = new JLabel("Priority");
+		lblPriority.setBounds(505, 207, 55, 16);
+		panel_newSupport.add(lblPriority);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"High", "Medium", "Low"}));
+		comboBox_2.setBounds(505, 225, 78, 26);
+		panel_newSupport.add(comboBox_2);
+		
+		JLabel lblNewLabel_2 = new JLabel("Message");
+		lblNewLabel_2.setBounds(26, 271, 112, 16);
+		panel_newSupport.add(lblNewLabel_2);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(26, 290, 459, 138);
+		panel_newSupport.add(textArea);
+		
+		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setBounds(505, 290, 90, 28);
+		panel_newSupport.add(btnSubmit);
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.setBounds(505, 322, 90, 28);
+		panel_newSupport.add(btnClear);
+		
+		JPanel panel_viewTicket = new JPanel();
+		panel_viewTicket.setBackground(Color.WHITE);
+		tabbedPane_2.addTab("View Tickets", null, panel_viewTicket, null);
+		
+		JPanel panel_sentItems = new JPanel();
+		panel_sentItems.setBackground(Color.WHITE);
+		tabbedPane_2.addTab("Sent Items", null, panel_sentItems, null);
+		
+		JPanel panel_requestCancel = new JPanel();
+		panel_requestCancel.setBackground(Color.WHITE);
+		tabbedPane_2.addTab("Request Cancelation", null, panel_requestCancel, null);
+		tabbedPane_2.setForegroundAt(3, Color.RED);
+		tabbedPane_2.setBackgroundAt(3, Color.BLACK);
+		
+		JPanel panel_payment = new JPanel();
+		tabbedPane.addTab("Payment", null, panel_payment, null);
+		
+		JPanel panel_sample = new JPanel();
+		tabbedPane.addTab("Sample", null, panel_sample, null);
+		panel_sample.setLayout(null);
+		
+		JTabbedPane tabbedPane_sample_new = new JTabbedPane(JTabbedPane.LEFT);
+		tabbedPane_sample_new.setBackground(SystemColor.inactiveCaption);
+		tabbedPane_sample_new.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPane_sample_new.setBounds(0, 13, 873, 454);
+		panel_sample.add(tabbedPane_sample_new);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBackground(Color.WHITE);
+		tabbedPane_sample_new.addTab("Submit New \r\nSample", null, panel_6, null);
+		panel_6.setLayout(null);
+		
+		JLabel lblNewLabel_3 = new JLabel("New Sample");
+		lblNewLabel_3.setBounds(20, 17, 114, 30);
+		lblNewLabel_3.setFont(new Font("SansSerif", Font.BOLD, 17));
+		panel_6.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("<html><p>Cryo Cell Corporation wants their customers to take an on-line questionaire whether the sample to be stored is at risk from various infectious diseases.</p><br/><p>Please take a look at our <a href=\"http:google.com/\">terms and condtions</a> before taking the questionaire.</p>\r\n<br />\r\nOnline Questionaire - <a href=\"http://bit.ly/cccquestionaire\">http://bit.ly/cccquestionaire</a>\r\n\r\n</html>");
+		lblNewLabel_4.setBounds(20, 59, 699, 119);
+		panel_6.add(lblNewLabel_4);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(Color.WHITE);
+		tabbedPane_sample_new.addTab("Submit 2nd Sample", null, panel_5, null);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
+		tabbedPane_sample_new.addTab("View Samples", null, panel_2, null);
+		
+		JPanel panel_dashboard = new JPanel();
+		panel_dashboard.setSize(new Dimension(10, 10));
+		panel_dashboard.setMinimumSize(new Dimension(5, 5));
+		panel_dashboard.setAlignmentY(Component.TOP_ALIGNMENT);
+		panel_dashboard.setFocusable(false);
+		panel_dashboard.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panel_dashboard.setForeground(SystemColor.desktop);
+		tabbedPane.addTab("Dashboard", new ImageIcon("C:\\Users\\user\\Desktop\\dashboard.png"), panel_dashboard, null);
+		panel_dashboard.setLayout(null);
+		tabbedPane.setForegroundAt(5, SystemColor.textHighlight);
+		tabbedPane.setBackgroundAt(5, SystemColor.desktop);
+		
+
+	}
+}

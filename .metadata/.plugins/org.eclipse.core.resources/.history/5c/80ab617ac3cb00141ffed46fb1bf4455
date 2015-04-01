@@ -1,0 +1,27 @@
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+
+
+public class Invoice {
+	
+	FileInputStream fis = new FileInputStream("\\src\\test\\report1.jrxml");
+    BufferedInputStream bufferedInputStream = new BufferedInputStream(fis);
+
+    //set parameters
+    Map map = new HashMap();
+    map.put("testid", para);
+
+    //compile report
+    JasperReport jasperReport = (JasperReport) JasperCompileManager.compileReport(bufferedInputStream);
+    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+
+
+    //view report to UI
+        JasperViewer.viewReport(jasperPrint, false); 
+
+}

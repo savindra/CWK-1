@@ -1,0 +1,9 @@
+
+public class Sample implements SampleInterface {
+	
+	private String sampleID;
+	private Date storageDate;
+	private Date endDate;
+	
+
+}

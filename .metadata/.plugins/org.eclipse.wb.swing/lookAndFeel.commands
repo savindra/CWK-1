@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+	<set-visible id="CDE/Motif" visible="false"/>
+	<set-visible id="Windows Classic" visible="false"/>
+	<set-visible id="Windows" visible="false"/>
+	<set-visible id="Nimbus" visible="true"/>
+	<set-visible id="Metal" visible="false"/>
+</commands>

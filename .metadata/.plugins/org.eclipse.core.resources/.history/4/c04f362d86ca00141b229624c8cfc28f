@@ -1,0 +1,150 @@
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import de.root1.simon.Lookup;
+import de.root1.simon.Simon;
+import de.root1.simon.exceptions.EstablishConnectionFailed;
+import de.root1.simon.exceptions.LookupFailedException;
+
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+public class UI_Login extends JFrame {
+	private JPasswordField passwordField;
+	private JTextField textField_userID;
+	
+	private static String lang;
+	private static String country;
+	
+	
+	public UI_Login() {
+		
+		setTitle("Login - Cryo Cell Coporation");
+		setSize(new Dimension(350, 410));
+		getContentPane().setLayout(null);
+		
+		JLabel lblUsername = new JLabel("User ID");
+		lblUsername.setBounds(71, 187, 94, 16);
+		getContentPane().add(lblUsername);
+		
+		textField_userID = new JTextField();
+		textField_userID.setBounds(69, 209, 216, 28);
+		getContentPane().add(textField_userID);
+		textField_userID.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setBounds(71, 249, 94, 16);
+		getContentPane().add(lblPassword);
+		
+		passwordField = new JPasswordField();
+		passwordField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		passwordField.setBounds(69, 275, 214, 28);
+		getContentPane().add(passwordField);
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				String userID;
+				String password;
+				ServerInterface server = null;
+				String role = null;
+				
+				if(e.getSource() == btnLogin) {
+					userID = textField_userID.getText();
+					password = new String(passwordField.getPassword());
+					
+					try {
+						server = (ServerInterface) Client.getLookup().lookup("server");
+						server = server.newServer();
+						role = server.login(userID, password);
+						Client.getLookup().release(server);
+						
+					} catch (LookupFailedException | EstablishConnectionFailed | UnknownHostException e1) {
+						e1.printStackTrace();
+					}
+					if(role.equalsIgnoreCase("customer")) {
+						dispose();
+						UI_Customer.userID = userID;
+						UI_Customer.run();
+						
+					} else if( role.equalsIgnoreCase("Lab Manager") || role.equalsIgnoreCase("Client Account Manager") || role.equalsIgnoreCase("Lab Technician")) {
+						UI_Employee.run();
+					}else
+						JOptionPane.showMessageDialog(UI_Login.this, "Wrong username and Password combination", "Login failed", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		btnLogin.setBounds(114, 319, 110, 28);
+		getContentPane().add(btnLogin);
+		
+		JLabel lblCreateAn = new JLabel("<html><a href=\"#\">create an account</a></html>");
+		lblCreateAn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				UI_Registration.run();
+			}
+		});
+		lblCreateAn.setBounds(188, 187, 97, 16);
+		getContentPane().add(lblCreateAn);
+		
+		JComboBox comboBox_lang_select = new JComboBox();
+		comboBox_lang_select.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if( comboBox_lang_select.getSelectedIndex() == 0 ){
+					Locale l = new Locale("en", "US");
+					ResourceBundle r = ResourceBundle.getBundle("ui_login_lang/language", l);
+					
+					lblUsername.setText(r.getString("UserID"));
+					lblPassword.setText(r.getString("Password"));
+					lblCreateAn.setText("<html> <a href="#">" + r.getString("CreateAccount")  + "</a></html>");
+					btnLogin.setText(r.getString("login"));
+					
+				}
+				
+				if( comboBox_lang_select.getSelectedIndex() == 1 ){
+					Locale l = new Locale("es", "ES");
+					ResourceBundle r = ResourceBundle.getBundle("ui_login_lang/language", l);
+					
+					lblUsername.setText(r.getString("UserID"));
+					lblPassword.setText(r.getString("Password"));
+					lblCreateAn.setText(r.getString("CreateAccount"));
+					btnLogin.setText(r.getString("login"));
+					
+				}
+			}
+		});
+		comboBox_lang_select.setModel(new DefaultComboBoxModel(new String[] {"English", "Spanish"}));
+		comboBox_lang_select.setBounds(6, 17, 97, 26);
+		getContentPane().add(comboBox_lang_select);
+		setVisible(true);
+		
+	}
+	
+	public static UI_Login run(){
+		return new UI_Login();
+	}
+}

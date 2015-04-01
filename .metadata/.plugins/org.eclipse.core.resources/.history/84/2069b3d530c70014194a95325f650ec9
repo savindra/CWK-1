@@ -1,0 +1,84 @@
+
+import de.root1.simon.Lookup;
+import de.root1.simon.exceptions.EstablishConnectionFailed;
+
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+
+import de.root1.simon.Simon;
+import de.root1.simon.exceptions.LookupFailedException;
+
+public class Client {
+
+    public static void main(String[] args) throws IOException, LookupFailedException, EstablishConnectionFailed, NoSuchAlgorithmException {
+
+        // create a callback object
+        ClientCallbackImpl clientCallbackImpl = new ClientCallbackImpl();
+
+        // 'lookup' the server object
+        Lookup nameLookup = Simon.createNameLookup("127.0.0.1", 44444);
+        ServerInterface server = (ServerInterface) nameLookup.lookup("server");
+
+        // use the serverobject as it would exist on your local machine
+        SessionInterface session = server.login("DonaldDuck", clientCallbackImpl);
+
+        session.doSomething();
+        
+        CustomerInterface customer = (CustomerInterface) nameLookup.lookup("customer");
+        
+        RegistrationInterface registration = (RegistrationInterface) nameLookup.lookup("registration");
+        registration = registration.newRegistration();
+        
+        
+        String salt = getSalt();
+        String pass = get_SHA_256_SecurePassword("cus123", salt);
+        registration.setUser("customer", pass, salt, "User");
+        
+        System.out.println( registration.execute() );
+        
+        System.out.println("Result:\n" + server.login("customer", "cus123") );
+  
+        
+        // do some more stuff
+        // ...
+
+        // and finally 'release' the serverobject to release to connection to the server
+        //nameLookup.release(server);
+        //nameLookup.release(customer);
+    }
+    
+    public static String get_SHA_256_SecurePassword(String enteredPass, String salt){
+		
+		String generatedPass = null;
+		try{
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update(salt.getBytes());
+			byte[] bytes = md.digest(enteredPass.getBytes());
+			StringBuilder sb = new StringBuilder();
+			
+			for(int i=0;i<bytes.length;i++)
+				sb.append(Integer.toString( (bytes[i] & 0xff) + 0x100, 16).substring(1) );
+			
+			generatedPass = sb.toString();
+			
+		}catch(NoSuchAlgorithmException e){
+			e.printStackTrace();
+		}
+		
+		return generatedPass;
+	}
+    
+    public static String getSalt() throws NoSuchAlgorithmException{
+    	SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+    	byte[] salt = new byte[16];
+    	sr.nextBytes(salt);
+    	return salt.toString();
+    }
+    
+    public static void createLoginUI(boolean b){
+    	if(b)
+    		
+    }
+}

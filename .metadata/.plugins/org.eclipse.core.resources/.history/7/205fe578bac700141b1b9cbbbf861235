@@ -1,0 +1,199 @@
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import java.awt.Desktop;
+import java.awt.Font;
+
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+
+import java.awt.Color;
+
+import javax.swing.border.EtchedBorder;
+import javax.swing.JTextField;
+
+import java.awt.SystemColor;
+
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
+
+import javax.swing.JPasswordField;
+import javax.swing.JCheckBox;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+
+public class UI_Registration extends JFrame {
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
+	public UI_Registration() {
+		getContentPane().setBackground(SystemColor.inactiveCaption);
+		setVisible(true);
+		getContentPane().setLayout(null);
+		
+		JLabel lblNewCustomerRegistration = new JLabel("New Customer Registration");
+		lblNewCustomerRegistration.setFont(new Font("Dialog", Font.BOLD, 17));
+		lblNewCustomerRegistration.setBounds(139, 26, 257, 23);
+		getContentPane().add(lblNewCustomerRegistration);
+		
+		JPanel panel_personal = new JPanel();
+		panel_personal.setBackground(Color.WHITE);
+		panel_personal.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Personal Details", TitledBorder.LEADING, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
+		panel_personal.setBounds(18, 61, 455, 225);
+		getContentPane().add(panel_personal);
+		panel_personal.setLayout(null);
+		
+		JLabel lblName = new JLabel("Name");
+		lblName.setBounds(130, 28, 39, 16);
+		panel_personal.add(lblName);
+		
+		JLabel lblTitle = new JLabel("Title");
+		lblTitle.setBounds(16, 28, 39, 16);
+		panel_personal.add(lblTitle);
+		
+		textField = new JTextField();
+		textField.setBounds(165, 22, 271, 28);
+		panel_personal.add(textField);
+		textField.setColumns(10);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Mr.", "Ms.", "Mrs."}));
+		comboBox.setBounds(67, 23, 61, 26);
+		panel_personal.add(comboBox);
+		
+		JLabel lblStreet = new JLabel("Street");
+		lblStreet.setBounds(16, 61, 55, 16);
+		panel_personal.add(lblStreet);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(64, 56, 372, 28);
+		panel_personal.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblCity = new JLabel("City");
+		lblCity.setBounds(16, 95, 55, 16);
+		panel_personal.add(lblCity);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(64, 89, 183, 28);
+		panel_personal.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblPostcode = new JLabel("Postcode");
+		lblPostcode.setBounds(259, 96, 55, 16);
+		panel_personal.add(lblPostcode);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(314, 89, 122, 28);
+		panel_personal.add(textField_3);
+		textField_3.setColumns(10);
+		
+		JLabel lblCountry = new JLabel("Country");
+		lblCountry.setBounds(16, 123, 55, 16);
+		panel_personal.add(lblCountry);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(64, 118, 183, 26);
+		panel_personal.add(comboBox_1);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setBounds(16, 157, 55, 16);
+		panel_personal.add(lblEmail);
+		
+		textField_4 = new JTextField();
+		textField_4.setBounds(64, 151, 183, 28);
+		panel_personal.add(textField_4);
+		textField_4.setColumns(10);
+		
+		JLabel lblAge = new JLabel("D.O.B");
+		lblAge.setBounds(259, 157, 39, 16);
+		panel_personal.add(lblAge);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(298, 151, 135, 28);
+		panel_personal.add(dateChooser);
+		
+		JLabel lblGender = new JLabel("Gender");
+		lblGender.setBounds(16, 191, 55, 16);
+		panel_personal.add(lblGender);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"Male", "Female"}));
+		comboBox_2.setBounds(64, 185, 91, 26);
+		panel_personal.add(comboBox_2);
+		
+		JLabel lblPhoneNo = new JLabel("Phone No");
+		lblPhoneNo.setBounds(169, 191, 55, 16);
+		panel_personal.add(lblPhoneNo);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(236, 185, 200, 28);
+		panel_personal.add(textField_5);
+		textField_5.setColumns(10);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(18, 306, 455, 125);
+		getContentPane().add(panel);
+		panel.setBackground(Color.WHITE);
+		panel.setBorder(new TitledBorder(null, "User Account", TitledBorder.LEADING, TitledBorder.BELOW_TOP, null, new Color(59, 59, 59)));
+		panel.setLayout(null);
+		
+		JLabel lblUsername = new JLabel("Username");
+		lblUsername.setBounds(16, 35, 66, 16);
+		panel.add(lblUsername);
+		
+		textField_6 = new JTextField();
+		textField_6.setBounds(122, 29, 142, 28);
+		panel.add(textField_6);
+		textField_6.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setBounds(16, 63, 66, 16);
+		panel.add(lblPassword);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(122, 57, 200, 28);
+		panel.add(passwordField);
+		
+		JLabel lblVerifyPass = new JLabel("Verify Password");
+		lblVerifyPass.setBounds(16, 91, 107, 16);
+		panel.add(lblVerifyPass);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setBounds(122, 85, 200, 28);
+		panel.add(passwordField_1);
+		
+		JCheckBox chckbxIAcceptThe = new JCheckBox("I accept the");
+		chckbxIAcceptThe.setBounds(18, 437, 104, 18);
+		getContentPane().add(chckbxIAcceptThe);
+		
+		JLabel lblTermsAndConditions = new JLabel("<html><a href="#">terms and conditions.</a></html>");
+		lblTermsAndConditions.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					Desktop.getDesktop().browse(new URI("https://sites.google.com/site/cryocellcorporation/terms-conditions"));
+				} catch (IOException | URISyntaxException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		lblTermsAndConditions.setBounds(106, 438, 130, 17);
+		getContentPane().add(lblTermsAndConditions);
+	}
+}

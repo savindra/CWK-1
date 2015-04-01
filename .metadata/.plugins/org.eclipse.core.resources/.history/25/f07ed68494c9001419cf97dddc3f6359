@@ -1,0 +1,38 @@
+package Customer;
+
+import java.util.Date;
+
+public class Payment {
+	
+	private String cardType;
+	private String cardNo;
+	private Date expDate;
+	private String paymentPlan;
+	public String getCardType() {
+		return cardType;
+	}
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
+	}
+	public String getCardNo() {
+		return cardNo;
+	}
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
+	}
+	public Date getExpDate() {
+		return expDate;
+	}
+	public void setExpDate(Date expDate) {
+		this.expDate = expDate;
+	}
+	public String getPaymentPlan() {
+		return paymentPlan;
+	}
+	public void setPaymentPlan(String paymentPlan) {
+		this.paymentPlan = paymentPlan;
+	}
+	
+	public 
+
+}

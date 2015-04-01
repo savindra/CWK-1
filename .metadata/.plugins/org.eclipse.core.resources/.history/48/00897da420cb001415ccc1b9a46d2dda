@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
+
+public interface DatabaseInterface {
+	
+	public CustomerInterface getCustomer(String userID);
+	
+	public String getLastUserID();
+	
+	public DatabaseInterface newDatabase();
+	public int insertTempSample(String clientID);
+	
+	public int userRegister(String password, String salt, String role);
+	
+	public String getSamples(String userID, String status);
+	
+	public String[] getSampleStatus(String status);
+	
+	public DefaultTableModel getAllCustomers();
+	
+	public int updateCollectionPointSampleID(String sampleIDNew, String sampleIDOld);
+	
+	public int updateSampleID(Sample sample);
+
+}

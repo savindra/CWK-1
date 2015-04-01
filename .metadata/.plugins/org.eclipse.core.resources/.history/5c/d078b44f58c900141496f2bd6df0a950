@@ -1,0 +1,9 @@
+public interface DatabaseInterface {
+	
+	public CustomerInterface getCustomer(String userID);
+	
+	public String getLastUserID();
+	
+	public DatabaseInterface newDatabase();
+
+}

@@ -1,0 +1,451 @@
+
+
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
+
+import java.awt.SystemColor;
+import java.awt.Dimension;
+import java.awt.Component;
+
+import javax.swing.JPopupMenu;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+
+import java.awt.ComponentOrientation;
+import java.awt.FlowLayout;
+import java.awt.Color;
+
+import javax.swing.border.LineBorder;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import java.awt.Font;
+import java.net.UnknownHostException;
+
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.JScrollBar;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import de.root1.simon.exceptions.EstablishConnectionFailed;
+import de.root1.simon.exceptions.LookupFailedException;
+
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+
+@SuppressWarnings("serial")
+public class UI_Customer extends JFrame {
+	private JTextField txt_new_sup_name;
+	private JTextField txt_new_sup_email;
+	private JTextField txt_new_sup_subject;
+	
+	public static String userID;
+	
+	public UI_Customer() {
+		setForeground(Color.GRAY);
+		setFocusable(false);
+		setTitle("Customer - Cryo Cell Coporation [id:" + userID + "]");
+		setVisible(true);
+		setSize(new Dimension(906, 586));
+		setBackground(SystemColor.desktop);
+		
+		JLabel lbl_ad_title = new JLabel("Title");
+		JLabel lbl_ad_name = new JLabel("Name");
+		JLabel lbl_ad_userID = new JLabel("Username");
+		JLabel lbl_ad_phone = new JLabel("Phone");
+		JLabel lbl_ad_address = new JLabel("Address");
+		JLabel lbl_ad_city = new JLabel("City");
+		JLabel lbl_ad_postcode = new JLabel("Postcode");
+		JLabel lbl_ad_country = new JLabel("Country");
+		JLabel lbl_ad_email = new JLabel("Email");
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		
+		tabbedPane.setBackground(Color.DARK_GRAY);
+		tabbedPane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		JPanel panel_dashboard = new JPanel();
+		panel_dashboard.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		
+		panel_dashboard.setSize(new Dimension(10, 10));
+		panel_dashboard.setMinimumSize(new Dimension(5, 5));
+		panel_dashboard.setAlignmentY(Component.TOP_ALIGNMENT);
+		panel_dashboard.setFocusable(false);
+		panel_dashboard.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panel_dashboard.setForeground(SystemColor.desktop);
+		tabbedPane.addTab("Dashboard", new ImageIcon(UI_Customer.class.getResource("/img/dashboard.png")), panel_dashboard, null);
+		tabbedPane.setForegroundAt(0, SystemColor.textHighlight);
+		tabbedPane.setBackgroundAt(0, SystemColor.desktop);
+		panel_dashboard.setLayout(null);
+		
+		JPanel panel_sample = new JPanel();
+		tabbedPane.addTab("Sample", null, panel_sample, null);
+		panel_sample.setLayout(null);
+		
+		JTabbedPane tabbedPane_sample_new = new JTabbedPane(JTabbedPane.LEFT);
+		tabbedPane_sample_new.setBackground(SystemColor.inactiveCaption);
+		tabbedPane_sample_new.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPane_sample_new.setBounds(0, 13, 873, 454);
+		panel_sample.add(tabbedPane_sample_new);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBackground(Color.WHITE);
+		tabbedPane_sample_new.addTab("Submit New \r\nSample", null, panel_6, null);
+		panel_6.setLayout(null);
+		
+		JLabel lblNewLabel_3 = new JLabel("New Sample");
+		lblNewLabel_3.setBounds(20, 17, 114, 30);
+		lblNewLabel_3.setFont(new Font("SansSerif", Font.BOLD, 17));
+		panel_6.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("<html><p>Cryo Cell Corporation wants their customers to take an on-line questionaire whether the sample to be stored is at risk from various infectious diseases.</p><br/><p>Please take a look at our <a href=\"http:google.com/\">terms and condtions</a> before taking the questionaire.</p>\r\n<br />\r\nOnline Questionaire - <a href=\"http://bit.ly/cccquestionaire\">http://bit.ly/cccquestionaire</a>\r\n\r\n</html>");
+		lblNewLabel_4.setBounds(20, 59, 699, 119);
+		panel_6.add(lblNewLabel_4);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(Color.WHITE);
+		tabbedPane_sample_new.addTab("Submit 2nd Sample", null, panel_5, null);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
+		tabbedPane_sample_new.addTab("View Samples", null, panel_2, null);
+		
+		JPanel panel_payment = new JPanel();
+		tabbedPane.addTab("Payment", null, panel_payment, null);
+		//tabbedPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panel_dashboard, panel_myAccount, btnLogout, panel, label, lblAccountDetails, lblYouCurrentAccount, panel_1, panel_Settings, panel_support, scrollPane, tabbedPane_2, panel_newSupport, lblOpenTicket, lblNewLabel, lblName, txt_new_sup_name, lblEmail, txt_new_sup_email, lblSubject, txt_new_sup_subject, lblDepartment, comboBox_newsup_dept, lblNewLabel_1, comboBox_newsup_rsample, lblPriority, comboBox_newsup_priority, lblNewLabel_2, textArea_newsup_msg, btn_newsup_Submit, btn_newsup_Clear, panel_viewTicket, panel_sentItems, panel_requestCancel, panel_payment, panel_sample, tabbedPane_sample_new, panel_6, lblNewLabel_3, lblNewLabel_4, panel_5, panel_2}));
+		
+		JPanel panel_support = new JPanel();
+		tabbedPane.addTab("Support", null, panel_support, null);
+		panel_support.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(442, 5, 6, 6);
+		panel_support.add(scrollPane);
+		
+		JTabbedPane tabbedPane_2 = new JTabbedPane(JTabbedPane.LEFT);
+		tabbedPane_2.setBackground(Color.WHITE);
+		tabbedPane_2.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPane_2.setBounds(6, 20, 862, 446);
+		panel_support.add(tabbedPane_2);
+		
+		JPanel panel_newSupport = new JPanel();
+		panel_newSupport.setBackground(Color.WHITE);
+		tabbedPane_2.addTab("New Support Ticket", null, panel_newSupport, null);
+		panel_newSupport.setLayout(null);
+		
+		JLabel lblOpenTicket = new JLabel("Open Ticket");
+		lblOpenTicket.setFont(new Font("SansSerif", Font.BOLD, 17));
+		lblOpenTicket.setBounds(26, 17, 112, 31);
+		panel_newSupport.add(lblOpenTicket);
+		
+		JLabel lblNewLabel = new JLabel("If you can't find a solution to your problems, you can submit a ticket by selecting the appropriate options below.");
+		lblNewLabel.setBounds(26, 52, 610, 16);
+		panel_newSupport.add(lblNewLabel);
+		
+		JLabel lblName = new JLabel("Name");
+		lblName.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblName.setBounds(26, 90, 55, 16);
+		panel_newSupport.add(lblName);
+		
+		txt_new_sup_name = new JTextField();
+		txt_new_sup_name.setBounds(26, 107, 217, 28);
+		panel_newSupport.add(txt_new_sup_name);
+		txt_new_sup_name.setColumns(10);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setBounds(366, 90, 55, 16);
+		panel_newSupport.add(lblEmail);
+		
+		txt_new_sup_email = new JTextField();
+		txt_new_sup_email.setBounds(366, 107, 205, 28);
+		panel_newSupport.add(txt_new_sup_email);
+		txt_new_sup_email.setColumns(10);
+		
+		JLabel lblSubject = new JLabel("Subject");
+		lblSubject.setBounds(26, 147, 55, 16);
+		panel_newSupport.add(lblSubject);
+		
+		txt_new_sup_subject = new JTextField();
+		txt_new_sup_subject.setBounds(26, 164, 344, 28);
+		panel_newSupport.add(txt_new_sup_subject);
+		txt_new_sup_subject.setColumns(10);
+		
+		JLabel lblDepartment = new JLabel("Department");
+		lblDepartment.setBounds(26, 207, 86, 16);
+		panel_newSupport.add(lblDepartment);
+		
+		JComboBox comboBox_newsup_dept = new JComboBox();
+		comboBox_newsup_dept.setModel(new DefaultComboBoxModel(new String[] {"Payment Related", "General Enquiry", "Need any other Help"}));
+		comboBox_newsup_dept.setBounds(26, 225, 173, 26);
+		panel_newSupport.add(comboBox_newsup_dept);
+		
+		JLabel lblNewLabel_1 = new JLabel("Related Sample");
+		lblNewLabel_1.setBounds(282, 207, 99, 16);
+		panel_newSupport.add(lblNewLabel_1);
+		
+		JComboBox comboBox_newsup_rsample = new JComboBox();
+		comboBox_newsup_rsample.setBounds(282, 225, 157, 26);
+		panel_newSupport.add(comboBox_newsup_rsample);
+		
+		JLabel lblPriority = new JLabel("Priority");
+		lblPriority.setBounds(505, 207, 55, 16);
+		panel_newSupport.add(lblPriority);
+		
+		JComboBox comboBox_newsup_priority = new JComboBox();
+		comboBox_newsup_priority.setModel(new DefaultComboBoxModel(new String[] {"High", "Medium", "Low"}));
+		comboBox_newsup_priority.setBounds(505, 225, 78, 26);
+		panel_newSupport.add(comboBox_newsup_priority);
+		
+		JLabel lblNewLabel_2 = new JLabel("Message");
+		lblNewLabel_2.setBounds(26, 271, 112, 16);
+		panel_newSupport.add(lblNewLabel_2);
+		
+		JTextArea textArea_newsup_msg = new JTextArea();
+		textArea_newsup_msg.setBounds(26, 290, 459, 138);
+		panel_newSupport.add(textArea_newsup_msg);
+		
+		JButton btn_newsup_Submit = new JButton("Submit");
+		btn_newsup_Submit.setBounds(505, 290, 90, 28);
+		panel_newSupport.add(btn_newsup_Submit);
+		
+		JButton btn_newsup_Clear = new JButton("Clear");
+		btn_newsup_Clear.setBounds(505, 322, 90, 28);
+		panel_newSupport.add(btn_newsup_Clear);
+		
+		JPanel panel_viewTicket = new JPanel();
+		panel_viewTicket.setBackground(Color.WHITE);
+		tabbedPane_2.addTab("View Tickets", null, panel_viewTicket, null);
+		
+		JPanel panel_sentItems = new JPanel();
+		panel_sentItems.setBackground(Color.WHITE);
+		tabbedPane_2.addTab("Sent Items", null, panel_sentItems, null);
+		
+		JPanel panel_requestCancel = new JPanel();
+		panel_requestCancel.setBackground(Color.WHITE);
+		tabbedPane_2.addTab("Request Cancelation", null, panel_requestCancel, null);
+		tabbedPane_2.setForegroundAt(3, Color.RED);
+		tabbedPane_2.setBackgroundAt(3, Color.BLACK);
+		
+		JPanel panel_Settings = new JPanel();
+		tabbedPane.addTab("Settings", null, panel_Settings, null);
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 530, GroupLayout.PREFERRED_SIZE)
+		);
+		
+		
+		JPanel panel_myAccount = new JPanel();
+		panel_myAccount.setEnabled(false);
+		tabbedPane.addTab("My Account", null, panel_myAccount, null);
+		panel_myAccount.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBorder(null);
+		panel.setBounds(19, 27, 850, 117);
+		panel_myAccount.add(panel);
+		panel.setLayout(null);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(UI_Customer.class.getResource("/img/avatarn.png")));
+		label.setBounds(17, 6, 100, 100);
+		panel.add(label);
+		
+		JLabel lblAccountDetails = new JLabel("Account Details");
+		lblAccountDetails.setFont(new Font("SansSerif", Font.BOLD, 17));
+		lblAccountDetails.setBounds(145, 17, 152, 29);
+		panel.add(lblAccountDetails);
+		
+		JLabel lblYouCurrentAccount = new JLabel("You current account details are listed below.");
+		lblYouCurrentAccount.setBounds(145, 46, 282, 16);
+		panel.add(lblYouCurrentAccount);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(null);
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(19, 146, 850, 304);
+		panel_myAccount.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(null, "General Information", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_3.setBackground(Color.WHITE);
+		panel_3.setBounds(6, 6, 684, 139);
+		panel_1.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblTitle = new JLabel("Title");
+		lblTitle.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblTitle.setBounds(21, 27, 55, 16);
+		panel_3.add(lblTitle);
+		
+		JLabel lblNewLabel_5 = new JLabel("Password");
+		lblNewLabel_5.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblNewLabel_5.setBounds(21, 72, 72, 16);
+		panel_3.add(lblNewLabel_5);
+		
+		lbl_ad_title.setBounds(105, 27, 55, 16);
+		panel_3.add(lbl_ad_title);
+		
+		JLabel label_3 = new JLabel("*****");
+		label_3.setBounds(105, 72, 72, 16);
+		panel_3.add(label_3);
+		
+		JLabel lblName_1 = new JLabel("Name");
+		lblName_1.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblName_1.setBounds(325, 27, 55, 16);
+		panel_3.add(lblName_1);
+		
+		JLabel lblPhone = new JLabel("Phone");
+		lblPhone.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblPhone.setBounds(325, 49, 55, 16);
+		panel_3.add(lblPhone);
+		
+		lbl_ad_name.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		lbl_ad_name.setBounds(406, 27, 247, 16);
+		panel_3.add(lbl_ad_name);
+		
+		
+		lbl_ad_phone.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		lbl_ad_phone.setBounds(406, 49, 155, 16);
+		panel_3.add(lbl_ad_phone);
+		
+		JLabel lblUsername = new JLabel("User ID");
+		lblUsername.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblUsername.setBounds(21, 49, 72, 16);
+		panel_3.add(lblUsername);
+		
+		lbl_ad_userID.setBounds(105, 49, 84, 16);
+		panel_3.add(lbl_ad_userID);
+		
+		JButton btn_ad_changePass = new JButton("Change Password");
+		btn_ad_changePass.setBounds(104, 88, 131, 28);
+		panel_3.add(btn_ad_changePass);
+		
+		JLabel lblAge = new JLabel("Age");
+		lblAge.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblAge.setBounds(325, 72, 55, 16);
+		panel_3.add(lblAge);
+		
+		JLabel lbl_ad_age = new JLabel("Age");
+		lbl_ad_age.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		lbl_ad_age.setBounds(406, 72, 55, 16);
+		panel_3.add(lbl_ad_age);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setLayout(null);
+		panel_4.setBorder(new TitledBorder(null, "Contact Information", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
+		panel_4.setBackground(Color.WHITE);
+		panel_4.setBounds(6, 157, 684, 120);
+		panel_1.add(panel_4);
+		
+		JLabel lblAddress = new JLabel("Address");
+		lblAddress.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblAddress.setBounds(21, 27, 55, 16);
+		panel_4.add(lblAddress);
+		
+		JLabel label_5 = new JLabel("Email");
+		label_5.setFont(new Font("SansSerif", Font.BOLD, 12));
+		label_5.setBounds(21, 49, 55, 16);
+		panel_4.add(label_5);
+		
+		JLabel lblPostcode = new JLabel("Postcode");
+		lblPostcode.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblPostcode.setBounds(21, 72, 72, 16);
+		panel_4.add(lblPostcode);
+		
+		lbl_ad_address.setBounds(105, 27, 178, 16);
+		panel_4.add(lbl_ad_address);
+		
+		lbl_ad_email.setBounds(105, 49, 178, 16);
+		panel_4.add(lbl_ad_email);
+		
+		lbl_ad_postcode.setBounds(105, 72, 87, 16);
+		panel_4.add(lbl_ad_postcode);
+		
+		JLabel lblCity = new JLabel("City");
+		lblCity.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblCity.setBounds(325, 27, 55, 16);
+		panel_4.add(lblCity);
+		
+		JLabel lblCountry = new JLabel("Country");
+		lblCountry.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblCountry.setBounds(325, 49, 55, 16);
+		panel_4.add(lblCountry);
+		
+		lbl_ad_city.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		lbl_ad_city.setBounds(406, 27, 153, 16);
+		panel_4.add(lbl_ad_city);
+		
+		lbl_ad_country.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		lbl_ad_country.setBounds(406, 49, 153, 16);
+		panel_4.add(lbl_ad_country);
+		
+		JButton btnLogout = new JButton("Log out");
+		btnLogout.setBounds(737, 269, 95, 25);
+		panel_1.add(btnLogout);
+		getContentPane().setLayout(groupLayout);
+		
+		tabbedPane.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				if(tabbedPane.getSelectedIndex() == 5 ){
+					
+					CustomerInterface customer;
+					DatabaseInterface database;
+					try {
+						customer = (CustomerInterface) Client.getLookup().lookup("customer");
+						database = (DatabaseInterface) Client.getLookup().lookup("database");
+						database = database.newDatabase();
+						customer = database.getCustomer(userID);
+						lbl_ad_title.setText( customer.getTitle() );
+						lbl_ad_name.setText( customer.getName() );
+						//lbl_ad_userID.setText( customer.get)
+						lbl_ad_phone.setText( customer.getPhoneNo() );
+						lbl_ad_address.setText( customer.getAddress().getStreet());
+						lbl_ad_city.setText( customer.getAddress().getCity() );
+						lbl_ad_postcode.setText( customer.getAddress().getPostcode() );
+						lbl_ad_country.setText( customer.getAddress().getCountry() );
+						lbl_ad_email.setText(customer.getEmail() );
+						
+						Client.getLookup().release(customer);
+						Client.getLookup().release(database);
+					} catch (UnknownHostException | LookupFailedException
+							| EstablishConnectionFailed e1) {
+						e1.printStackTrace();
+					}
+					
+				}
+			}
+		});
+		
+		tabbedPane.setSelectedIndex(0);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+		
+
+	}
+	
+	public static UI_Customer run(){
+		return new UI_Customer();
+	}
+}
